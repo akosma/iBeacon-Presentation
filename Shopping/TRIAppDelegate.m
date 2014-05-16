@@ -8,39 +8,114 @@
 
 #import "TRIAppDelegate.h"
 
+
+@interface TRIAppDelegate () <CLLocationManagerDelegate>
+
+@property (nonatomic, strong) CLLocationManager *manager;
+@property (nonatomic, strong) CLBeaconRegion *region;
+@property (nonatomic) BOOL notificationSent;
+
+@end
+
+
 @implementation TRIAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Core location stuff
+    self.manager = [[CLLocationManager alloc] init];
+    self.manager.delegate = self;
+    self.notificationSent = NO;
+    
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"49EF247E-00B4-4693-A61C-A63C7BD34085"];
+    self.region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+                                                     identifier:@"com.trifork.Shopping"];
+    self.region.notifyEntryStateOnDisplay = YES;
+    
+    if ([CLLocationManager isRangingAvailable])
+    {
+        [self.manager startMonitoringForRegion:self.region];
+    }
+
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
+#pragma mark - CLLocationManagerDelegate methods
+
+- (void)locationManager:(CLLocationManager *)manager
+         didEnterRegion:(CLRegion *)region
 {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [self.manager requestStateForRegion:self.region];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
+-(void)locationManager:(CLLocationManager *)manager
+     didDetermineState:(CLRegionState)state
+             forRegion:(CLRegion *)region
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    if (state == CLRegionStateInside)
+    {
+        if (!self.notificationSent)
+        {
+            UILocalNotification *notification = [[UILocalNotification alloc] init];
+            notification.fireDate = [NSDate date];
+            notification.alertBody = @"Welcome to the Computer Shop!";
+            notification.alertAction = @"Show";
+            notification.soundName = UILocalNotificationDefaultSoundName;
+            
+            NSTimeZone* timezone = [NSTimeZone defaultTimeZone];
+            notification.timeZone = timezone;
+            
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+            self.notificationSent = YES;
+        }
+        [self.manager startRangingBeaconsInRegion:self.region];
+    }
+    else
+    {
+        //Stop Ranging here
+        [self.manager stopRangingBeaconsInRegion:self.region];
+    }
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
+- (void)locationManager:(CLLocationManager *)manager
+        didRangeBeacons:(NSArray *)beacons
+               inRegion:(CLBeaconRegion *)region
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
+    //    NSLog(@"======= new ranging");
+    //    for (CLBeacon *beacon in beacons)
+    //    {
+    //        NSLog(@"beacon: minor = %@, rssi = %li, accuracy = %1.2f, proximity = %li",
+    //              beacon.minor, beacon.rssi, beacon.accuracy, beacon.proximity);
+    //    }
+    
+    NSPredicate *predicateRelevantBeacons = [NSPredicate predicateWithFormat:@"(self.accuracy > 0) AND ((self.proximity == %d) OR (self.proximity == %d))", CLProximityNear, CLProximityImmediate];
+    NSArray *relevantsBeacons = [beacons filteredArrayUsingPredicate:predicateRelevantBeacons];
+    NSPredicate *predicateClosest = [NSPredicate predicateWithFormat:@"(self.accuracy == %@.@min.accuracy) AND (self.rssi == %@.@max.rssi)", relevantsBeacons, relevantsBeacons];
+    
+    CLBeacon *closestBeacon = nil;
+    NSArray *closestArray = [relevantsBeacons filteredArrayUsingPredicate:predicateClosest];
+    
+    //    NSLog(@"======= closest");
+    //    for (CLBeacon *beacon in closestArray)
+    //    {
+    //        NSLog(@"beacon: minor = %@, rssi = %li, accuracy = %1.2f, proximity = %li",
+    //              beacon.minor, beacon.rssi, beacon.accuracy, beacon.proximity);
+    //    }
+    
+    if ([closestArray count] > 0)
+    {
+        closestBeacon = [closestArray objectAtIndex:0];
+    }
+    if (closestBeacon)
+    {
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center postNotificationName:@"NEW_BEACONS"
+                              object:self
+                            userInfo:@{
+                                       @"minor": closestBeacon.minor
+                                       }];
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
 }
 
 @end

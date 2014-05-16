@@ -219,6 +219,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Trifork GmbH";
 				TargetAttributes = {
+					3A27DAD21926490500214CC1 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					3A27DAF91926490500214CC1 = {
 						TestTargetID = 3A27DAD21926490500214CC1;
 					};

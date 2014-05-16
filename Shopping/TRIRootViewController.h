@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 Trifork GmbH. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+
 
 @interface TRIRootViewController : UIViewController <UIPageViewControllerDelegate>
 

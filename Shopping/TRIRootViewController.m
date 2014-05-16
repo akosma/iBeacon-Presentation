@@ -7,57 +7,86 @@
 //
 
 #import "TRIRootViewController.h"
-
 #import "TRIModelController.h"
-
 #import "TRIDataViewController.h"
 
 @interface TRIRootViewController ()
-@property (readonly, strong, nonatomic) TRIModelController *modelController;
+
+@property (strong, nonatomic) TRIModelController *modelController;
+@property (nonatomic) NSInteger currentPage;
+
 @end
 
-@implementation TRIRootViewController
 
-@synthesize modelController = _modelController;
+
+@implementation TRIRootViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    // Configure the page view controller and add it as a child view controller.
-    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl
+                                                              navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                                                            options:nil];
     self.pageViewController.delegate = self;
 
-    TRIDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
+    TRIDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0
+                                                                                     storyboard:self.storyboard];
     NSArray *viewControllers = @[startingViewController];
-    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-
+    [self.pageViewController setViewControllers:viewControllers
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:NO
+                                     completion:nil];
     self.pageViewController.dataSource = self.modelController;
-
     [self addChildViewController:self.pageViewController];
     [self.view addSubview:self.pageViewController.view];
-
-    // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
     CGRect pageViewRect = self.view.bounds;
     self.pageViewController.view.frame = pageViewRect;
-
     [self.pageViewController didMoveToParentViewController:self];
-
-    // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
+    
+    
+    self.currentPage = 0;
+    
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserverForName:@"NEW_BEACONS"
+                        object:nil
+                         queue:nil
+                    usingBlock:^(NSNotification *notification) {
+                        NSInteger selected = [[notification userInfo][@"minor"] intValue];
+                        // Show the corresponding data
+                        UIViewController *page = [self.modelController viewControllerAtIndex:selected
+                                                                                  storyboard:self.storyboard];
+                        
+                        if (page != nil && self.currentPage != selected)
+                        {
+                            self.currentPage = selected;
+                            __weak UIPageViewController* pvc = self.pageViewController;
+                            [pvc setViewControllers:@[page]
+                                          direction:UIPageViewControllerNavigationDirectionForward
+                                           animated:YES completion:^(BOOL finished) {
+                                               UIPageViewController* pvcs = pvc;
+                                               if (!pvcs) return;
+                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                   [pvcs setViewControllers:@[page]
+                                                                  direction:UIPageViewControllerNavigationDirectionForward
+                                                                   animated:NO completion:nil];
+                                               });
+                                           }];
+                        }
+                    }];
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (TRIModelController *)modelController
 {
-     // Return the model controller object, creating it if necessary.
-     // In more complex implementations, the model controller may be passed to the view controller.
-    if (!_modelController) {
+    if (!_modelController)
+    {
         _modelController = [[TRIModelController alloc] init];
     }
     return _modelController;
@@ -65,19 +94,15 @@
 
 #pragma mark - UIPageViewController delegate methods
 
-/*
-- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController
+                   spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    
-}
- */
-
-- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-    // Set the spine position to "min" and the page view controller's view controllers array to contain just one view controller. Setting the spine position to 'UIPageViewControllerSpineLocationMid' in landscape orientation sets the doubleSided property to YES, so set it to NO here.
-    UIViewController *currentViewController = self.pageViewController.viewControllers[0];
+    UIViewController *currentViewController = self.pageViewController.viewControllers[self.currentPage];
     NSArray *viewControllers = @[currentViewController];
-    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    [self.pageViewController setViewControllers:viewControllers
+                                      direction:UIPageViewControllerNavigationDirectionForward
+                                       animated:YES
+                                     completion:nil];
 
     self.pageViewController.doubleSided = NO;
     return UIPageViewControllerSpineLocationMin;
