@@ -29,7 +29,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.dataLabel.text = [self.dataObject description];
+    self.dataLabel.text = self.dataObject[@"title"];
+    self.descriptionView.text = self.dataObject[@"text"];
+    self.imageView.image = self.dataObject[@"image"];
 }
 
 @end
