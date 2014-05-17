@@ -58,6 +58,13 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     return YES;
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    app.applicationIconBadgeNumber = 0;
+    [app cancelAllLocalNotifications];
+}
+
 #pragma mark - CLLocationManagerDelegate methods
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -87,7 +94,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
                 
                 NSTimeZone* timezone = [NSTimeZone defaultTimeZone];
                 notification.timeZone = timezone;
-                
+            
+                app.applicationIconBadgeNumber = 1;
                 [app scheduleLocalNotification:notification];
                 self.lastNotification = now;
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
