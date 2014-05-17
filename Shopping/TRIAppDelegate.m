@@ -13,7 +13,7 @@
 
 
 static NSString *LAST_NOFIFICATION_SENT = @"LAST_NOFIFICATION_SENT";
-
+static NSString *SHOPPING_UUID = @"49EF247E-00B4-4693-A61C-A63C7BD34085";
 
 
 @interface TRIAppDelegate () <CLLocationManagerDelegate>
@@ -45,7 +45,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         [defaults synchronize];
     }
     
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"49EF247E-00B4-4693-A61C-A63C7BD34085"];
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:SHOPPING_UUID];
     self.region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
                                                      identifier:@"com.trifork.Shopping"];
     self.region.notifyEntryStateOnDisplay = YES;
