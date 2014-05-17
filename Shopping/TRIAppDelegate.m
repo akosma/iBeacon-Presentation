@@ -20,7 +20,7 @@ static NSString *LAST_NOFIFICATION_SENT = @"LAST_NOFIFICATION_SENT";
 
 @property (nonatomic, strong) CLLocationManager *manager;
 @property (nonatomic, strong) CLBeaconRegion *region;
-@property (nonatomic) NSDate *lastNotificationSent;
+@property (nonatomic) NSDate *lastNotification;
 
 @end
 
@@ -35,11 +35,11 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     self.manager.delegate = self;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.lastNotificationSent = [defaults objectForKey:LAST_NOFIFICATION_SENT];
-    if (self.lastNotificationSent == nil)
+    self.lastNotification = [defaults objectForKey:LAST_NOFIFICATION_SENT];
+    if (self.lastNotification == nil)
     {
         NSDate *past = [NSDate distantPast];
-        self.lastNotificationSent = past;
+        self.lastNotification = past;
         [defaults setObject:past
                      forKey:LAST_NOFIFICATION_SENT];
         [defaults synchronize];
@@ -74,7 +74,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     {
         // Do not display more than one notification every 10 minutes
         NSDate *now = [NSDate date];
-        if ([self.lastNotificationSent timeIntervalSinceDate:now] > 600)
+        NSTimeInterval interval = [now timeIntervalSinceDate:self.lastNotification];
+        if (interval > 600)
         {
             UILocalNotification *notification = [[UILocalNotification alloc] init];
             notification.fireDate = [NSDate date];
@@ -86,7 +87,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
             notification.timeZone = timezone;
             
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-            self.lastNotificationSent = now;
+            self.lastNotification = now;
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:now
                          forKey:LAST_NOFIFICATION_SENT];
