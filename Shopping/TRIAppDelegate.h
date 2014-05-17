@@ -7,7 +7,6 @@
 //
 
 @import UIKit;
-@import CoreLocation;
 
 
 @interface TRIAppDelegate : UIResponder <UIApplicationDelegate>

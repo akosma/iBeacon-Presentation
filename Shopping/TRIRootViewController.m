@@ -9,6 +9,7 @@
 #import "TRIRootViewController.h"
 #import "TRIModelController.h"
 #import "TRIDataViewController.h"
+#import "TRINotifications.h"
 
 @interface TRIRootViewController ()
 
@@ -44,29 +45,32 @@
     [self.pageViewController didMoveToParentViewController:self];
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
     
-    
     self.currentPage = 0;
     
-    
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserverForName:@"NEW_BEACONS"
+    __weak typeof(self) weakSelf = self;
+    [center addObserverForName:CLOSEST_BEACON_FOUND
                         object:nil
                          queue:nil
                     usingBlock:^(NSNotification *notification) {
                         NSInteger selected = [[notification userInfo][@"minor"] intValue];
                         // Show the corresponding data
-                        UIViewController *page = [self.modelController viewControllerAtIndex:selected
-                                                                                  storyboard:self.storyboard];
+                        UIViewController *page = [weakSelf.modelController viewControllerAtIndex:selected
+                                                                                      storyboard:weakSelf.storyboard];
                         
-                        if (page != nil && self.currentPage != selected)
+                        if (page != nil && weakSelf.currentPage != selected)
                         {
-                            self.currentPage = selected;
-                            __weak UIPageViewController* pvc = self.pageViewController;
+                            weakSelf.currentPage = selected;
+                            __weak UIPageViewController* pvc = weakSelf.pageViewController;
                             [pvc setViewControllers:@[page]
                                           direction:UIPageViewControllerNavigationDirectionForward
-                                           animated:YES completion:^(BOOL finished) {
+                                           animated:YES
+                                         completion:^(BOOL finished) {
                                                UIPageViewController* pvcs = pvc;
-                                               if (!pvcs) return;
+                                               if (!pvcs)
+                                               {
+                                                   return;
+                                               }
                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                    [pvcs setViewControllers:@[page]
                                                                   direction:UIPageViewControllerNavigationDirectionForward

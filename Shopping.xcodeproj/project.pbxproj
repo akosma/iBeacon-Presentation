@@ -26,6 +26,7 @@
 		3A27DB12192649DB00214CC1 /* mbp13_retina_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DB11192649DB00214CC1 /* mbp13_retina_image.png */; };
 		3A27DB1419264A3C00214CC1 /* ipad_air_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DB1319264A3C00214CC1 /* ipad_air_image.png */; };
 		3A27DB1619264B8A00214CC1 /* RaspberryPi.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DB1519264B8A00214CC1 /* RaspberryPi.png */; };
+		3A40A94F19276AF800FEFB3E /* TRINotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40A94E19276AF800FEFB3E /* TRINotifications.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		3A27DB11192649DB00214CC1 /* mbp13_retina_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mbp13_retina_image.png; sourceTree = "<group>"; };
 		3A27DB1319264A3C00214CC1 /* ipad_air_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_air_image.png; sourceTree = "<group>"; };
 		3A27DB1519264B8A00214CC1 /* RaspberryPi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RaspberryPi.png; sourceTree = "<group>"; };
+		3A40A94D19276AF800FEFB3E /* TRINotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRINotifications.h; sourceTree = "<group>"; };
+		3A40A94E19276AF800FEFB3E /* TRINotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRINotifications.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +138,8 @@
 				3A27DAEC1926490500214CC1 /* TRIDataViewController.m */,
 				3A27DAEE1926490500214CC1 /* TRIModelController.h */,
 				3A27DAEF1926490500214CC1 /* TRIModelController.m */,
+				3A40A94D19276AF800FEFB3E /* TRINotifications.h */,
+				3A40A94E19276AF800FEFB3E /* TRINotifications.m */,
 				3A27DAF11926490500214CC1 /* Main.storyboard */,
 				3A27DAF41926490500214CC1 /* Images.xcassets */,
 				3A27DADD1926490500214CC1 /* Supporting Files */,
@@ -281,6 +286,7 @@
 			files = (
 				3A27DAE71926490500214CC1 /* TRIAppDelegate.m in Sources */,
 				3A27DAE31926490500214CC1 /* main.m in Sources */,
+				3A40A94F19276AF800FEFB3E /* TRINotifications.m in Sources */,
 				3A27DAED1926490500214CC1 /* TRIDataViewController.m in Sources */,
 				3A27DAEA1926490500214CC1 /* TRIRootViewController.m in Sources */,
 				3A27DAF01926490500214CC1 /* TRIModelController.m in Sources */,
@@ -488,6 +494,7 @@
 				3A27DB0D1926490500214CC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3A27DB0E1926490500214CC1 /* Build configuration list for PBXNativeTarget "ShoppingTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +503,7 @@
 				3A27DB101926490500214CC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

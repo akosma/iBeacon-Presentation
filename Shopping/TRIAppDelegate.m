@@ -6,26 +6,44 @@
 //  Copyright (c) 2014 Trifork GmbH. All rights reserved.
 //
 
+@import CoreLocation;
+
 #import "TRIAppDelegate.h"
+#import "TRINotifications.h"
+
+
+static NSString *LAST_NOFIFICATION_SENT = @"LAST_NOFIFICATION_SENT";
+
 
 
 @interface TRIAppDelegate () <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) CLLocationManager *manager;
 @property (nonatomic, strong) CLBeaconRegion *region;
-@property (nonatomic) BOOL notificationSent;
+@property (nonatomic) NSDate *lastNotificationSent;
 
 @end
 
 
 @implementation TRIAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+-           (BOOL)application:(UIApplication *)application
+didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Core location stuff
     self.manager = [[CLLocationManager alloc] init];
     self.manager.delegate = self;
-    self.notificationSent = NO;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.lastNotificationSent = [defaults objectForKey:LAST_NOFIFICATION_SENT];
+    if (self.lastNotificationSent == nil)
+    {
+        NSDate *past = [NSDate distantPast];
+        self.lastNotificationSent = past;
+        [defaults setObject:past
+                     forKey:LAST_NOFIFICATION_SENT];
+        [defaults synchronize];
+    }
     
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"49EF247E-00B4-4693-A61C-A63C7BD34085"];
     self.region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
@@ -54,7 +72,9 @@
 {
     if (state == CLRegionStateInside)
     {
-        if (!self.notificationSent)
+        // Do not display more than one notification every 10 minutes
+        NSDate *now = [NSDate date];
+        if ([self.lastNotificationSent timeIntervalSinceDate:now] > 600)
         {
             UILocalNotification *notification = [[UILocalNotification alloc] init];
             notification.fireDate = [NSDate date];
@@ -66,7 +86,11 @@
             notification.timeZone = timezone;
             
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-            self.notificationSent = YES;
+            self.lastNotificationSent = now;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:now
+                         forKey:LAST_NOFIFICATION_SENT];
+            [defaults synchronize];
         }
         [self.manager startRangingBeaconsInRegion:self.region];
     }
@@ -88,28 +112,19 @@
     //              beacon.minor, beacon.rssi, beacon.accuracy, beacon.proximity);
     //    }
     
-    NSPredicate *predicateRelevantBeacons = [NSPredicate predicateWithFormat:@"(self.accuracy > 0) AND ((self.proximity == %d) OR (self.proximity == %d))", CLProximityNear, CLProximityImmediate];
+    NSString *pred1 = @"(self.accuracy > 0) AND ((self.proximity == %d) OR (self.proximity == %d))";
+    NSPredicate *predicateRelevantBeacons = [NSPredicate predicateWithFormat:pred1, CLProximityNear, CLProximityImmediate];
     NSArray *relevantsBeacons = [beacons filteredArrayUsingPredicate:predicateRelevantBeacons];
-    NSPredicate *predicateClosest = [NSPredicate predicateWithFormat:@"(self.accuracy == %@.@min.accuracy) AND (self.rssi == %@.@max.rssi)", relevantsBeacons, relevantsBeacons];
-    
-    CLBeacon *closestBeacon = nil;
+
+    NSString *pred2 = @"(self.accuracy == %@.@min.accuracy) AND (self.rssi == %@.@max.rssi)";
+    NSPredicate *predicateClosest = [NSPredicate predicateWithFormat:pred2, relevantsBeacons, relevantsBeacons];
     NSArray *closestArray = [relevantsBeacons filteredArrayUsingPredicate:predicateClosest];
+    CLBeacon *closestBeacon = [closestArray firstObject];
     
-    //    NSLog(@"======= closest");
-    //    for (CLBeacon *beacon in closestArray)
-    //    {
-    //        NSLog(@"beacon: minor = %@, rssi = %li, accuracy = %1.2f, proximity = %li",
-    //              beacon.minor, beacon.rssi, beacon.accuracy, beacon.proximity);
-    //    }
-    
-    if ([closestArray count] > 0)
-    {
-        closestBeacon = [closestArray objectAtIndex:0];
-    }
     if (closestBeacon)
     {
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-        [center postNotificationName:@"NEW_BEACONS"
+        [center postNotificationName:CLOSEST_BEACON_FOUND
                               object:self
                             userInfo:@{
                                        @"minor": closestBeacon.minor
