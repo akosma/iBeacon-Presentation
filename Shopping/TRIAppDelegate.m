@@ -75,23 +75,25 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         // Do not display more than one notification every 10 minutes
         NSDate *now = [NSDate date];
         NSTimeInterval interval = [now timeIntervalSinceDate:self.lastNotification];
-        if (interval > 600)
+        UIApplication *app = [UIApplication sharedApplication];
+        if (interval > 600 && app.applicationState == UIApplicationStateBackground)
         {
-            UILocalNotification *notification = [[UILocalNotification alloc] init];
-            notification.fireDate = [NSDate date];
-            notification.alertBody = @"Welcome to the Computer Shop!";
-            notification.alertAction = @"Show";
-            notification.soundName = UILocalNotificationDefaultSoundName;
-            
-            NSTimeZone* timezone = [NSTimeZone defaultTimeZone];
-            notification.timeZone = timezone;
-            
-            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-            self.lastNotification = now;
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:now
-                         forKey:LAST_NOFIFICATION_SENT];
-            [defaults synchronize];
+                // If the app is in the background, show a local notification
+                UILocalNotification *notification = [[UILocalNotification alloc] init];
+                notification.fireDate = [NSDate date];
+                notification.alertBody = @"Welcome to the Computer Shop!";
+                notification.alertAction = @"Show";
+                notification.soundName = UILocalNotificationDefaultSoundName;
+                
+                NSTimeZone* timezone = [NSTimeZone defaultTimeZone];
+                notification.timeZone = timezone;
+                
+                [app scheduleLocalNotification:notification];
+                self.lastNotification = now;
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:now
+                             forKey:LAST_NOFIFICATION_SENT];
+                [defaults synchronize];
         }
         [self.manager startRangingBeaconsInRegion:self.region];
     }
