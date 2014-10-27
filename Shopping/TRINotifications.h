@@ -6,5 +6,4 @@
 //  Copyright (c) 2014 akosma. All rights reserved.
 //
 
-extern NSString * const CLOSEST_BEACON_FOUND;
-
+extern NSString *const CLOSEST_BEACON_FOUND;

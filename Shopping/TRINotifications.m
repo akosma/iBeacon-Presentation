@@ -8,4 +8,4 @@
 
 #import "TRINotifications.h"
 
-NSString * const CLOSEST_BEACON_FOUND = @"CLOSEST_BEACON_FOUND";
+NSString *const CLOSEST_BEACON_FOUND = @"CLOSEST_BEACON_FOUND";

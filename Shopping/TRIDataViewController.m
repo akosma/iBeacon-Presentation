@@ -18,8 +18,7 @@
 
 @implementation TRIDataViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.dataLabel.text = self.dataObject[@"title"];
     self.descriptionView.text = self.dataObject[@"text"];

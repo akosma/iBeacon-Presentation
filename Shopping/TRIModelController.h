@@ -12,7 +12,8 @@
 
 @interface TRIModelController : NSObject <UIPageViewControllerDataSource>
 
-- (TRIDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
+- (TRIDataViewController *)viewControllerAtIndex:(NSUInteger)index
+                                      storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(TRIDataViewController *)viewController;
 
 @end

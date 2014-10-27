@@ -18,21 +18,19 @@
 
 @end
 
-
-
 @implementation TRIRootViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl
-                                                              navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                                                            options:nil];
+    self.pageViewController = [[UIPageViewController alloc]
+        initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl
+          navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                        options:nil];
     self.pageViewController.delegate = self;
 
-    TRIDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0
-                                                                                     storyboard:self.storyboard];
-    NSArray *viewControllers = @[startingViewController];
+    TRIDataViewController *startingViewController =
+        [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
+    NSArray *viewControllers = @[ startingViewController ];
     [self.pageViewController setViewControllers:viewControllers
                                       direction:UIPageViewControllerNavigationDirectionForward
                                        animated:NO
@@ -44,53 +42,55 @@
     self.pageViewController.view.frame = pageViewRect;
     [self.pageViewController didMoveToParentViewController:self];
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
-    
+
     self.currentPage = 0;
-    
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+
     __weak typeof(self) weakSelf = self;
+    void (^block)(NSNotification *) = ^(NSNotification *notification) {
+        NSInteger selected = [[notification userInfo][@"minor"] intValue];
+        // Show the corresponding data
+        UIViewController *page =
+            [weakSelf.modelController viewControllerAtIndex:selected
+                                                 storyboard:weakSelf.storyboard];
+
+        if (page != nil && weakSelf.currentPage != selected) {
+            weakSelf.currentPage = selected;
+            __weak UIPageViewController *pvc = weakSelf.pageViewController;
+
+            void (^completion)(BOOL finished);
+            completion = ^(BOOL finished) {
+                UIPageViewController *pvcs = pvc;
+                if (!pvcs) {
+                    return;
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [pvcs setViewControllers:@[page]
+                                   direction:UIPageViewControllerNavigationDirectionForward
+                                    animated:NO
+                                  completion:nil];
+                });
+            };
+
+            [pvc setViewControllers:@[page]
+                          direction:UIPageViewControllerNavigationDirectionForward
+                           animated:YES
+                         completion:completion];
+        }
+    };
+
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserverForName:CLOSEST_BEACON_FOUND
                         object:nil
                          queue:nil
-                    usingBlock:^(NSNotification *notification) {
-                        NSInteger selected = [[notification userInfo][@"minor"] intValue];
-                        // Show the corresponding data
-                        UIViewController *page = [weakSelf.modelController viewControllerAtIndex:selected
-                                                                                      storyboard:weakSelf.storyboard];
-                        
-                        if (page != nil && weakSelf.currentPage != selected)
-                        {
-                            weakSelf.currentPage = selected;
-                            __weak UIPageViewController* pvc = weakSelf.pageViewController;
-                            [pvc setViewControllers:@[page]
-                                          direction:UIPageViewControllerNavigationDirectionForward
-                                           animated:YES
-                                         completion:^(BOOL finished) {
-                                               UIPageViewController* pvcs = pvc;
-                                               if (!pvcs)
-                                               {
-                                                   return;
-                                               }
-                                               dispatch_async(dispatch_get_main_queue(), ^{
-                                                   [pvcs setViewControllers:@[page]
-                                                                  direction:UIPageViewControllerNavigationDirectionForward
-                                                                   animated:NO completion:nil];
-                                               });
-                                           }];
-                        }
-                    }];
-    
+                    usingBlock:block];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (TRIModelController *)modelController
-{
-    if (!_modelController)
-    {
+- (TRIModelController *)modelController {
+    if (!_modelController) {
         _modelController = [[TRIModelController alloc] init];
     }
     return _modelController;
@@ -99,10 +99,10 @@
 #pragma mark - UIPageViewController delegate methods
 
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController
-                   spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-    UIViewController *currentViewController = self.pageViewController.viewControllers[self.currentPage];
-    NSArray *viewControllers = @[currentViewController];
+                   spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation {
+    UIViewController *currentViewController =
+        self.pageViewController.viewControllers[self.currentPage];
+    NSArray *viewControllers = @[ currentViewController ];
     [self.pageViewController setViewControllers:viewControllers
                                       direction:UIPageViewControllerNavigationDirectionForward
                                        animated:YES

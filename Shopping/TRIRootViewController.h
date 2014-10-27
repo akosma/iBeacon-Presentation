@@ -8,7 +8,6 @@
 
 @import UIKit;
 
-
 @interface TRIRootViewController : UIViewController <UIPageViewControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
