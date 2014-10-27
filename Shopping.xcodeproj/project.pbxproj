@@ -18,27 +18,12 @@
 		3A27DAF01926490500214CC1 /* TRIModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A27DAEF1926490500214CC1 /* TRIModelController.m */; };
 		3A27DAF31926490500214CC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DAF11926490500214CC1 /* Main.storyboard */; };
 		3A27DAF51926490500214CC1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DAF41926490500214CC1 /* Images.xcassets */; };
-		3A27DAFC1926490500214CC1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A27DAFB1926490500214CC1 /* XCTest.framework */; };
-		3A27DAFD1926490500214CC1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A27DAD61926490500214CC1 /* Foundation.framework */; };
-		3A27DAFE1926490500214CC1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A27DADA1926490500214CC1 /* UIKit.framework */; };
-		3A27DB061926490500214CC1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DB041926490500214CC1 /* InfoPlist.strings */; };
-		3A27DB081926490500214CC1 /* ShoppingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A27DB071926490500214CC1 /* ShoppingTests.m */; };
 		3A27DB12192649DB00214CC1 /* mbp13_retina_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DB11192649DB00214CC1 /* mbp13_retina_image.png */; };
 		3A27DB1419264A3C00214CC1 /* ipad_air_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DB1319264A3C00214CC1 /* ipad_air_image.png */; };
 		3A27DB1619264B8A00214CC1 /* RaspberryPi.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DB1519264B8A00214CC1 /* RaspberryPi.png */; };
 		3A40A94F19276AF800FEFB3E /* TRINotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40A94E19276AF800FEFB3E /* TRINotifications.m */; };
 		3A85130519FEB7AE0031C3EB /* estimote.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A85130419FEB7AE0031C3EB /* estimote.png */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3A27DAFF1926490500214CC1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3A27DACB1926490500214CC1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3A27DAD21926490500214CC1;
-			remoteInfo = Shopping;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3A27DAD31926490500214CC1 /* Shopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shopping.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,11 +44,7 @@
 		3A27DAEF1926490500214CC1 /* TRIModelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TRIModelController.m; sourceTree = "<group>"; };
 		3A27DAF21926490500214CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A27DAF41926490500214CC1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3A27DAFA1926490500214CC1 /* ShoppingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShoppingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A27DAFB1926490500214CC1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		3A27DB031926490500214CC1 /* ShoppingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShoppingTests-Info.plist"; sourceTree = "<group>"; };
-		3A27DB051926490500214CC1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3A27DB071926490500214CC1 /* ShoppingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingTests.m; sourceTree = "<group>"; };
 		3A27DB11192649DB00214CC1 /* mbp13_retina_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mbp13_retina_image.png; sourceTree = "<group>"; };
 		3A27DB1319264A3C00214CC1 /* ipad_air_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_air_image.png; sourceTree = "<group>"; };
 		3A27DB1519264B8A00214CC1 /* RaspberryPi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RaspberryPi.png; sourceTree = "<group>"; };
@@ -83,16 +64,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A27DAF71926490500214CC1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3A27DAFC1926490500214CC1 /* XCTest.framework in Frameworks */,
-				3A27DAFE1926490500214CC1 /* UIKit.framework in Frameworks */,
-				3A27DAFD1926490500214CC1 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -100,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				3A27DADC1926490500214CC1 /* Shopping */,
-				3A27DB011926490500214CC1 /* ShoppingTests */,
 				3A27DAD51926490500214CC1 /* Frameworks */,
 				3A27DAD41926490500214CC1 /* Products */,
 			);
@@ -110,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				3A27DAD31926490500214CC1 /* Shopping.app */,
-				3A27DAFA1926490500214CC1 /* ShoppingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,24 +130,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3A27DB011926490500214CC1 /* ShoppingTests */ = {
-			isa = PBXGroup;
-			children = (
-				3A27DB071926490500214CC1 /* ShoppingTests.m */,
-				3A27DB021926490500214CC1 /* Supporting Files */,
-			);
-			path = ShoppingTests;
-			sourceTree = "<group>";
-		};
-		3A27DB021926490500214CC1 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3A27DB031926490500214CC1 /* ShoppingTests-Info.plist */,
-				3A27DB041926490500214CC1 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -199,24 +150,6 @@
 			productReference = 3A27DAD31926490500214CC1 /* Shopping.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3A27DAF91926490500214CC1 /* ShoppingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3A27DB0E1926490500214CC1 /* Build configuration list for PBXNativeTarget "ShoppingTests" */;
-			buildPhases = (
-				3A27DAF61926490500214CC1 /* Sources */,
-				3A27DAF71926490500214CC1 /* Frameworks */,
-				3A27DAF81926490500214CC1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3A27DB001926490500214CC1 /* PBXTargetDependency */,
-			);
-			name = ShoppingTests;
-			productName = ShoppingTests;
-			productReference = 3A27DAFA1926490500214CC1 /* ShoppingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -234,9 +167,6 @@
 							};
 						};
 					};
-					3A27DAF91926490500214CC1 = {
-						TestTargetID = 3A27DAD21926490500214CC1;
-					};
 				};
 			};
 			buildConfigurationList = 3A27DACE1926490500214CC1 /* Build configuration list for PBXProject "Shopping" */;
@@ -253,7 +183,6 @@
 			projectRoot = "";
 			targets = (
 				3A27DAD21926490500214CC1 /* Shopping */,
-				3A27DAF91926490500214CC1 /* ShoppingTests */,
 			);
 		};
 /* End PBXProject section */
@@ -273,14 +202,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A27DAF81926490500214CC1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3A27DB061926490500214CC1 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -297,23 +218,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A27DAF61926490500214CC1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3A27DB081926490500214CC1 /* ShoppingTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3A27DB001926490500214CC1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3A27DAD21926490500214CC1 /* Shopping */;
-			targetProxy = 3A27DAFF1926490500214CC1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3A27DADF1926490500214CC1 /* InfoPlist.strings */ = {
@@ -330,14 +235,6 @@
 				3A27DAF21926490500214CC1 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3A27DB041926490500214CC1 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A27DB051926490500214CC1 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -441,46 +338,6 @@
 			};
 			name = Release;
 		};
-		3A27DB0F1926490500214CC1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Shopping.app/Shopping";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Shopping/Shopping-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "ShoppingTests/ShoppingTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		3A27DB101926490500214CC1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Shopping.app/Shopping";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Shopping/Shopping-Prefix.pch";
-				INFOPLIST_FILE = "ShoppingTests/ShoppingTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -498,15 +355,6 @@
 			buildConfigurations = (
 				3A27DB0C1926490500214CC1 /* Debug */,
 				3A27DB0D1926490500214CC1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3A27DB0E1926490500214CC1 /* Build configuration list for PBXNativeTarget "ShoppingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3A27DB0F1926490500214CC1 /* Debug */,
-				3A27DB101926490500214CC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
