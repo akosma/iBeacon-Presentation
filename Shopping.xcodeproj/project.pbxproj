@@ -27,6 +27,7 @@
 		3A27DB1419264A3C00214CC1 /* ipad_air_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DB1319264A3C00214CC1 /* ipad_air_image.png */; };
 		3A27DB1619264B8A00214CC1 /* RaspberryPi.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A27DB1519264B8A00214CC1 /* RaspberryPi.png */; };
 		3A40A94F19276AF800FEFB3E /* TRINotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40A94E19276AF800FEFB3E /* TRINotifications.m */; };
+		3A85130519FEB7AE0031C3EB /* estimote.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A85130419FEB7AE0031C3EB /* estimote.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		3A27DB1519264B8A00214CC1 /* RaspberryPi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RaspberryPi.png; sourceTree = "<group>"; };
 		3A40A94D19276AF800FEFB3E /* TRINotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRINotifications.h; sourceTree = "<group>"; };
 		3A40A94E19276AF800FEFB3E /* TRINotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRINotifications.m; sourceTree = "<group>"; };
+		3A85130419FEB7AE0031C3EB /* estimote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = estimote.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				3A27DB11192649DB00214CC1 /* mbp13_retina_image.png */,
+				3A85130419FEB7AE0031C3EB /* estimote.png */,
 				3A27DB1319264A3C00214CC1 /* ipad_air_image.png */,
 				3A27DB1519264B8A00214CC1 /* RaspberryPi.png */,
 				3A27DAE51926490500214CC1 /* TRIAppDelegate.h */,
@@ -263,6 +266,7 @@
 				3A27DB12192649DB00214CC1 /* mbp13_retina_image.png in Resources */,
 				3A27DB1419264A3C00214CC1 /* ipad_air_image.png in Resources */,
 				3A27DAF51926490500214CC1 /* Images.xcassets in Resources */,
+				3A85130519FEB7AE0031C3EB /* estimote.png in Resources */,
 				3A27DB1619264B8A00214CC1 /* RaspberryPi.png in Resources */,
 				3A27DAE11926490500214CC1 /* InfoPlist.strings in Resources */,
 				3A27DAF31926490500214CC1 /* Main.storyboard in Resources */,
@@ -417,6 +421,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shopping/Shopping-Prefix.pch";
 				INFOPLIST_FILE = "Shopping/Shopping-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -430,6 +435,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shopping/Shopping-Prefix.pch";
 				INFOPLIST_FILE = "Shopping/Shopping-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

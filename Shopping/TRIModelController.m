@@ -3,7 +3,7 @@
 //  Shopping
 //
 //  Created by Adrian on 16/05/14.
-//  Copyright (c) 2014 Trifork GmbH. All rights reserved.
+//  Copyright (c) 2014 akosma. All rights reserved.
 //
 
 #import "TRIModelController.h"
@@ -46,6 +46,13 @@
                           @"title": @"iPad Air",
                           @"text": @"The iPad Air is the fifth generation iPad. Unveiled during a keynote on October 22, 2013, the iPad Air features the 64-bit Apple A7 processor along with a M7 coprocessor. The iPad Air marks the first major design change for the iPad since the iPad 2; it now features a thinner design that is 7.5 millimetres thick and has a smaller screen bezel similar to the iPad mini. Apple reduced the overall volume for the iPad Air by using thinner components resulting in a 25% reduction in weight over the iPad 2. Though it still uses the same 9.7-inch Retina display as the previous iPad model, an improved front-facing camera makes using FaceTime much clearer. The new front facing camera is capable of video in 720p HD, includes face detection, and backside illumination. The rear camera received an upgrade as well; now being called the iSight camera, in addition to the same functions as the front camera it also contains a 5MP CCD, hybrid IR filter and a fixed ƒ/2.4 aperture.",
                           @"image": [UIImage imageNamed:@"ipad_air_image"]
+                          },
+                      @{
+                          @"major": @1,
+                          @"minor": @3,
+                          @"title": @"Estimote Beacon",
+                          @"text": @"Technically speaking, Estimote Beacon is a super small computer. It has a powerful 32-bit ARM® Cortex M0 CPU with 256kB flash memory, accelerometer, temperature sensor and what is most important – 2.4 GHz Bluetooth 4.0 Smart (also known as BLE or Bluetooth low energy) bidirectional radio. Don't confuse Bluetooth Smart with the first version of Bluetooth (the one that required pairing and never actually worked). It's a completely new, redesigned standard developed by Nokia™ that is now implemented in all modern smartphones like Apple iPhone™ 4S or Samsung™ Galaxy S III, and other smart devices like Google Glass™, Fitbit trackers or smartwatches. It's called low-energy because it really is. BLE devices can run up to 2+ years with a single coin battery depending on the signal strenth and how frequent they broadcast information around.",
+                          @"image": [UIImage imageNamed:@"estimote"]
                           }
                       ];
     }

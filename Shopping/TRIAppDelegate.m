@@ -3,7 +3,7 @@
 //  Shopping
 //
 //  Created by Adrian on 16/05/14.
-//  Copyright (c) 2014 Trifork GmbH. All rights reserved.
+//  Copyright (c) 2014 akosma. All rights reserved.
 //
 
 @import CoreLocation;
@@ -31,8 +31,12 @@ static NSString *SHOPPING_UUID = @"49EF247E-00B4-4693-A61C-A63C7BD34085";
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Core location stuff
-    self.manager = [[CLLocationManager alloc] init];
-    self.manager.delegate = self;
+    if ([CLLocationManager isRangingAvailable])
+    {
+        self.manager = [[CLLocationManager alloc] init];
+        self.manager.delegate = self;
+        [self.manager requestAlwaysAuthorization];
+    }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.lastNotification = [defaults objectForKey:LAST_NOFIFICATION_SENT];
@@ -45,16 +49,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         [defaults synchronize];
     }
     
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:SHOPPING_UUID];
-    self.region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
-                                                     identifier:@"com.trifork.Shopping"];
-    self.region.notifyEntryStateOnDisplay = YES;
-    
-    if ([CLLocationManager isRangingAvailable])
-    {
-        [self.manager startMonitoringForRegion:self.region];
-    }
-
     return YES;
 }
 
@@ -66,6 +60,23 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 }
 
 #pragma mark - CLLocationManagerDelegate methods
+
+-      (void)locationManager:(CLLocationManager *)manager
+didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status == kCLAuthorizationStatusAuthorizedAlways)
+    {
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:SHOPPING_UUID];
+        self.region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+                                                         identifier:@"com.trifork.Shopping"];
+        self.region.notifyEntryStateOnDisplay = YES;
+        
+        if ([CLLocationManager isRangingAvailable])
+        {
+            [self.manager startMonitoringForRegion:self.region];
+        }
+    }
+}
 
 - (void)locationManager:(CLLocationManager *)manager
          didEnterRegion:(CLRegion *)region
