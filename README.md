@@ -36,7 +36,7 @@ Setup
 
 This application uses 3 or 4 iBeacons, all using the same UDID:
 `49EF247E-00B4-4693-A61C-A63C7BD34085`. These beacons would sometimes
-include (Estimote)[http://estimote.com] beacons, but also custom-built
+include [Estimote](http://estimote.com) beacons, but also custom-built
 Bluetooth 4.0 software running in dedicated devices.
 
 ### Mac OS X
