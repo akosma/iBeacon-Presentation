@@ -85,22 +85,41 @@
             @{
                 @"major" : @1,
                 @"minor" : @3,
-                @"title" : @"Estimote Beacon",
+                @"title" : @"Estimote Beacon – Ice",
                 @"text" : @"Technically speaking, Estimote Beacon is a super small computer. It "
-                          @"has a powerful 32-bit ARM® Cortex M0 CPU with 256kB flash memory, "
-                          @"accelerometer, temperature sensor and what is most important – 2.4 "
-                          @"GHz Bluetooth 4.0 Smart (also known as BLE or Bluetooth low energy) "
-                          @"bidirectional radio. Don't confuse Bluetooth Smart with the first "
-                          @"version of Bluetooth (the one that required pairing and never "
-                          @"actually worked). It's a completely new, redesigned standard "
-                          @"developed by Nokia™ that is now implemented in all modern smartphones "
-                          @"like Apple iPhone™ 4S or Samsung™ Galaxy S III, and other smart "
-                          @"devices like Google Glass™, Fitbit trackers or smartwatches. It's "
-                          @"called low-energy because it really is. BLE devices can run up to 2+ "
-                          @"years with a single coin battery depending on the signal strenth and "
-                          @"how frequent they broadcast information around.",
-                @"image" : [UIImage imageNamed:@"estimote"]
-            }
+                @"has a powerful 32-bit ARM® Cortex M0 CPU with 256kB flash memory, "
+                @"accelerometer, temperature sensor and what is most important – 2.4 "
+                @"GHz Bluetooth 4.0 Smart (also known as BLE or Bluetooth low energy) "
+                @"bidirectional radio. Don't confuse Bluetooth Smart with the first "
+                @"version of Bluetooth (the one that required pairing and never "
+                @"actually worked). It's a completely new, redesigned standard "
+                @"developed by Nokia™ that is now implemented in all modern smartphones "
+                @"like Apple iPhone™ 4S or Samsung™ Galaxy S III, and other smart "
+                @"devices like Google Glass™, Fitbit trackers or smartwatches. It's "
+                @"called low-energy because it really is. BLE devices can run up to 2+ "
+                @"years with a single coin battery depending on the signal strenth and "
+                @"how frequent they broadcast information around.",
+                @"image" : [UIImage imageNamed:@"estimote_ice"]
+                },
+            @{
+                @"major" : @1,
+                @"minor" : @4,
+                @"title" : @"Estimote Beacon – Mint",
+                @"text" : @"Technically speaking, Estimote Beacon is a super small computer. It "
+                @"has a powerful 32-bit ARM® Cortex M0 CPU with 256kB flash memory, "
+                @"accelerometer, temperature sensor and what is most important – 2.4 "
+                @"GHz Bluetooth 4.0 Smart (also known as BLE or Bluetooth low energy) "
+                @"bidirectional radio. Don't confuse Bluetooth Smart with the first "
+                @"version of Bluetooth (the one that required pairing and never "
+                @"actually worked). It's a completely new, redesigned standard "
+                @"developed by Nokia™ that is now implemented in all modern smartphones "
+                @"like Apple iPhone™ 4S or Samsung™ Galaxy S III, and other smart "
+                @"devices like Google Glass™, Fitbit trackers or smartwatches. It's "
+                @"called low-energy because it really is. BLE devices can run up to 2+ "
+                @"years with a single coin battery depending on the signal strenth and "
+                @"how frequent they broadcast information around.",
+                @"image" : [UIImage imageNamed:@"estimote_mint"]
+                }
         ];
     }
     return self;
