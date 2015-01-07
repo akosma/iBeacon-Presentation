@@ -39,23 +39,20 @@ This application uses 3 or 4 iBeacons, all using the same UDID:
 include (Estimote)[http://estimote.com] beacons, but also custom-built
 Bluetooth 4.0 software running in dedicated devices.
 
-Mac OS X
-~~~~~~~~
+### Mac OS X
 
 This presentation used to include an iBeacon running on my MacBook Pro
 computer, created using [Matthew Robinson's OS X iBeacon
 Code](https://github.com/mttrb/BeaconOSX) which unfortunately no longer
 works under Yosemite.
 
-iOS
-~~~
+### iOS
 
 During the presentation, I used [Localz's Beacon Toolkit
 app](http://localz.co/blog/beacon-toolkit/) to simulate a working
 iBeacon on my iPad Air.
 
-Raspberry Pi
-~~~~~~~~~~~~
+### Raspberry Pi
 
 During the presentation I set up a Raspberry Pi unit to broadcast that
 same UDID. The application uses the "major" and "minor" numbers to
