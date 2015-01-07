@@ -5,11 +5,14 @@ Presentation about iBeacons shown on May 26th, 2014 in Zürich CH, August
 13th in Leeds UK, August 14th in London UK, September 30th in Amsterdam
 NL, and October 28th in Durban, South Africa.
 
+Introduction
+------------
+
 This presentation is about iBeacon - a new technology based on Bluetooth
-- for both iOS and Android smartphones and tablets. iBeacon offers
-unprecedented opportunities to communicate with the user via your
-mobile app. There are no complicated configuration or setup, no need
-to scan QR codes, etc.
+– for both iOS and Android smartphones and tablets. iBeacon offers
+unprecedented opportunities to communicate with the user via your mobile
+app. There are no complicated configuration or setup, no need to scan QR
+codes, etc.
 
 iBeacons is the new frontier. Or at least that is what the press says
 every day. Using iBeacons, shops will be able to analyse in detail
@@ -27,4 +30,23 @@ architects) and non-technical team members (marketing managers, CEOs,
 project managers) interested in the characteristics of this new
 technology. It includes live demos of how to use iBeacons and a showcase
 of different options available in the market today.
+
+Setup
+-----
+
+This application uses 3 or 4 iBeacons, all using the same UDID:
+`49EF247E-00B4-4693-A61C-A63C7BD34085`.
+
+During the presentation I set up a Raspberry Pi unit to broadcast that
+same UDID. The application uses the "major" and "minor" numbers to
+detect the proximity of any of these beacons, and displays the
+corresponding information page in the screen of the iPhone.
+
+Raspberry Pi
+------------
+
+The code of the Raspberry Pi can be found in the `Raspberry Pi` folder
+in this repository. The `start.sh` and `stop.sh` scripts must be run as
+`sudo` and require the [bluez](http://www.bluez.org) library, which must
+be installed separately (`sudo apt-get install bluez`.)
 
