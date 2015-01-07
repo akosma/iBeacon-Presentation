@@ -35,15 +35,32 @@ Setup
 -----
 
 This application uses 3 or 4 iBeacons, all using the same UDID:
-`49EF247E-00B4-4693-A61C-A63C7BD34085`.
+`49EF247E-00B4-4693-A61C-A63C7BD34085`. These beacons would sometimes
+include (Estimote)[http://estimote.com] beacons, but also custom-built
+Bluetooth 4.0 software running in dedicated devices.
+
+Mac OS X
+~~~~~~~~
+
+This presentation used to include an iBeacon running on my MacBook Pro
+computer, created using [Matthew Robinson's OS X iBeacon
+Code](https://github.com/mttrb/BeaconOSX) which unfortunately no longer
+works under Yosemite.
+
+iOS
+~~~
+
+During the presentation, I used [Localz's Beacon Toolkit
+app](http://localz.co/blog/beacon-toolkit/) to simulate a working
+iBeacon on my iPad Air.
+
+Raspberry Pi
+~~~~~~~~~~~~
 
 During the presentation I set up a Raspberry Pi unit to broadcast that
 same UDID. The application uses the "major" and "minor" numbers to
 detect the proximity of any of these beacons, and displays the
 corresponding information page in the screen of the iPhone.
-
-Raspberry Pi
-------------
 
 The code of the Raspberry Pi can be found in the `Raspberry Pi` folder
 in this repository. The `start.sh` and `stop.sh` scripts must be run as
