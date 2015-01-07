@@ -39,6 +39,14 @@ This application uses 3 or 4 iBeacons, all using the same UDID:
 include [Estimote](http://estimote.com) beacons, but also custom-built
 Bluetooth 4.0 software running in dedicated devices.
 
+The (major, minor) pairs used in the application are as follows:
+
+- MacBook:       (1, 0) (not possible anymore in Yosemite, see below)
+- Raspberry:     (1, 1)
+- iPad:          (1, 2)
+- Estimote Ice:  (1, 3)
+- Estimote Mint: (1, 4)
+
 ### Mac OS X
 
 This presentation used to include an iBeacon running on my MacBook Pro
