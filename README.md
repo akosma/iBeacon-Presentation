@@ -1,5 +1,5 @@
-iBeacons
-========
+iBeacons Presentation
+=====================
 
 Presentation about iBeacons shown on May 26th, 2014 in Zürich CH, August
 13th in Leeds UK, August 14th in London UK, September 30th in Amsterdam
